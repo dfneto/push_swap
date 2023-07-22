@@ -25,3 +25,7 @@ void	swap(t_list **first, char a_b)
 	*first = temp; // enquanto **first é um ponteiro de um ponteiro, *first é um ponteiro e temp tbm
 	*/
 
+void	rotate(t_list **first, char a_b)
+{
+	//TODO
+}

@@ -8,6 +8,7 @@ typedef struct s_list
 }	t_list;
 
 #include <stdlib.h>
+#include <unistd.h>
 t_list	*ft_lstnew(int value);
 t_list	*ft_lstlast(t_list *root);
 void	ft_lstadd_back(t_list **first, t_list *new);
@@ -17,4 +18,4 @@ int		ft_lstsize(t_list *lst);
 
 
 
-void	swap(t_list **first);
+void	swap(t_list **first, char a_b);

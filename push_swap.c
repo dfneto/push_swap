@@ -3,13 +3,13 @@
 
 
 
-//int	main(int argc, char *argv[])
-int	main()
+int	main(int argc, char *argv[])
+//int	main()
 {
-	int argc = 4;
-	char *argv[] = {"0", "1", "2", "3"};
-//	if (argc > 1)
-//	{
+//	int argc = 4;
+//	char *argv[] = {"0", "1", "2", "3"};
+	if (argc > 1)
+	{
 		//TODO: check errors
 
 		t_list *first = ft_lstnew(atoi(argv[1]));
@@ -24,13 +24,14 @@ int	main()
 		print_list(first, argc - 1);
 		//printf("O endereço de root eh     : %p\n", root);
 		//printf("First aponta para o endeço: %p\n", first);
-		swap(&first);
+		swap(&first, 'a');
+		printf("Depois do swap ...\n");
 		//printf("First aponta para o endeço: %p\n", first);
 		print_list(first, argc - 1);
 //		printf("list size = %d\n", ft_lstsize(root));
 //		print_list(root, argc - 1);
 		
-//	}
+	}
 	//free no
 	return (0);
 }

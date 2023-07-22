@@ -22,14 +22,15 @@ int	main(int argc, char *argv[])
 			ft_lstadd_back(&first, node);
 		}
 		print_list(first, argc - 1);
-		//printf("O endereço de root eh     : %p\n", root);
-		//printf("First aponta para o endeço: %p\n", first);
+		printf("Nó de first: %p\n", first);
 		swap(&first, 'a');
 		printf("Depois do swap ...\n");
-		//printf("First aponta para o endeço: %p\n", first);
+		printf("Nó de first: %p\n", first);
+//		print_list(first, argc - 1);
+		swap(&first, 'b');
+		printf("Depois do swap ...\n");
+		printf("Nó de first: %p\n", first);
 		print_list(first, argc - 1);
-//		printf("list size = %d\n", ft_lstsize(root));
-//		print_list(root, argc - 1);
 		
 	}
 	//free no

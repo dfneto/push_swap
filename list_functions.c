@@ -37,7 +37,7 @@ void	print_list(t_list *root, int len_list)
 	i = 0;
 	while(i < len_list)
 	{
-		printf("Node value = %d\n", root->value);
+		printf("Node value = %d - %p\n", root->value, root);
 		root = root->next;
 		i++;
 	}

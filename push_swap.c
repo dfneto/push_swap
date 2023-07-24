@@ -26,6 +26,8 @@ int	main(int argc, char *argv[])
 		//swap(&first, 'a');
 		print_list(first, argc - 1); 
 //		rotate(&first, 'a');
+		reverse_rotate(&first, 'a');
+		print_list(first, argc - 1); 
 		
 	}
 	return (0);

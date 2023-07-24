@@ -21,3 +21,4 @@ int		ft_lstsize(t_list *lst);
 
 void	swap(t_list **first, char c);
 void	rotate(t_list **first, char c);
+void	reverse_rotate(t_list **first, char c);

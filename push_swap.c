@@ -21,12 +21,14 @@ int	main(int argc, char *argv[])
 			node = ft_lstnew(atoi(argv[i++]));
 			ft_lstadd_back(&first, node);
 		}
+		node = NULL; 
+		free(node);
 		print_list(first, argc - 1);
 		printf("Nó de first: %p\n", first);
 		swap(&first, 'a');
 		printf("Depois do swap ...\n");
 		printf("Nó de first: %p\n", first);
-//		print_list(first, argc - 1);
+		print_list(first, argc - 1);
 		swap(&first, 'b');
 		printf("Depois do swap ...\n");
 		printf("Nó de first: %p\n", first);

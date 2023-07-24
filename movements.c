@@ -1,20 +1,17 @@
 #include "push_swap.h"
 
-void	swap(t_list **first, char a_b)
+void	swap(t_list **first, char c)
 {
 	t_list	*temp;
-	char	*str;
 
 	temp = *first;
 	*first = (*first)->next;
 	temp->next = (*first)->next;
 	(*first)->next = temp;
+	temp = NULL;
 	free(temp);
-	if (a_b == 'a')
-		str = "sa\n\0";  //verificar: 'write' doesn't expect null-terminated strings (chat)
-	else
-		str = "sb\n\0";
-	write(1, str, 4);
+	if (c)
+		printf("s%c\n", c);
 }
 	/*minha versao primeira versão (funciona):
 	t_list *temp;
@@ -25,7 +22,7 @@ void	swap(t_list **first, char a_b)
 	*first = temp; // enquanto **first é um ponteiro de um ponteiro, *first é um ponteiro e temp tbm
 	*/
 
-void	rotate(t_list **first, char a_b)
+/*void	rotate(t_list **first, char a_b)
 {
 	//TODO
-}
+}*/

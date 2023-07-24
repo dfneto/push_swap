@@ -11,9 +11,10 @@ int	main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		//TODO: check errors
+		//TODO: use my ft_printf
 
 		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
-		t_list *first_b = NULL;
+//		t_list *first_b = NULL;
 		t_list *node;
 
 		int i = 2;
@@ -29,20 +30,11 @@ int	main(int argc, char *argv[])
 //		rotate(&first, 'a');
 //		reverse_rotate(&first, 'a');
 //		push(&first, &first_b, 'b');
-		push(&first, &first_b, 'b');
-		push(&first, &first_b, 'b');
-		push(&first, &first_b, 'b');
-		push(&first, &first_b, 'b');
-		printf("LISTA A: \n");
+//		double_swap(&first, &first_b);
+//		double_rotate(&first, &first_b);
+//		double_reverse_rotate(&first, &first_b);
 		print_list(first, ft_lstsize(first));
-		printf("LISTA B: \n");
-		print_list(first_b, ft_lstsize(first_b));
-		double_reverse_rotate(&first, &first_b);
-		printf("LISTA A: \n");
-		print_list(first, ft_lstsize(first));
-		printf("LISTA B: \n");
-		print_list(first_b, ft_lstsize(first_b));
-		
+		bubble_sort(&first, ft_lstsize(first));
 	}
 	return (0);
 }

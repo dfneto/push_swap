@@ -23,18 +23,10 @@ int	main(int argc, char *argv[])
 		}
 		node = NULL; 
 		free(node);
-		print_list(first, argc - 1);
-		printf("Nó de first: %p\n", first);
-		swap(&first, 'a');
-		printf("Depois do swap ...\n");
-		printf("Nó de first: %p\n", first);
-		print_list(first, argc - 1);
-		swap(&first, 'b');
-		printf("Depois do swap ...\n");
-		printf("Nó de first: %p\n", first);
-		print_list(first, argc - 1); //TODO: entender pq depois do segundo swap da ruim
+		//swap(&first, 'a');
+		print_list(first, argc - 1); 
+//		rotate(&first, 'a');
 		
 	}
-	//free no
 	return (0);
 }

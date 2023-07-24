@@ -9,7 +9,7 @@ void	swap(t_list **first, char c)
 	temp->next = (*first)->next;
 	(*first)->next = temp;
 	temp = NULL;
-	free(temp);
+	free(temp); //TODO: ver no python tutor pq acho que nao faz diferença isso
 	if (c)
 		printf("s%c\n", c);
 }
@@ -22,7 +22,26 @@ void	swap(t_list **first, char c)
 	*first = temp; // enquanto **first é um ponteiro de um ponteiro, *first é um ponteiro e temp tbm
 	*/
 
-/*void	rotate(t_list **first, char a_b)
+void	rotate(t_list **first, char c)
 {
-	//TODO
-}*/
+	t_list	*last;
+	t_list	*prev_last;
+
+	last = ft_lstlast(*first);
+	prev_last = get_prev_last(*first);
+	last->next = *first;
+	prev_last->next = NULL;
+	*first = last;
+	last = NULL; //TODO: remover essas limpezas se nao faz diferença
+	prev_last = NULL;
+	free(last);
+	free(prev_last);
+	if (c)
+		printf("r%c\n", c);
+	//printf("o prev last valor: %d\n", prev_last->value);
+	/*
+	a->b->c->null
+	b->c->a->null
+	*/
+
+}

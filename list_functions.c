@@ -22,6 +22,13 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
+t_list	*get_prev_last(t_list *root)
+{
+	while(root->next->next != NULL)
+		root = root->next;
+	return (root);
+}
+
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;

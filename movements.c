@@ -17,9 +17,9 @@ void	swap(t_list **first, char c)
 	t_list *temp;
 	temp = (*first)->next; //temp eh um ponteiro, (*first)->next tbm eh um ponteiro. Entao estou dizendo que ambos ponteiros apontam para (armazenam a) mesma direção
 	(*first)->next = temp->next;
-	temp->next = *first;
+	temp->next = *first; //somente first é um ponteiro de um ponteiro, *first eh o ponteiro de um nó, ou seja, um nó
 	//first = &temp; //o errado aqui é que estou pegando o endereço de temp, quando o que eu quero eh o valor de temp, ou seja, para quem ele aponta que eh o endereço do segundo nó, como fiz em *first = temp;
-	*first = temp; // enquanto **first é um ponteiro de um ponteiro, *first é um ponteiro e temp tbm, ambos para um nó, ou seja, *first e temp são ponteiros que guardam o endereço de uma estrutura t_list, mas poderia ser de um int ou char
+	*first = temp; // enquanto **first é um ponteiro de um ponteiro, *first é um ponteiro e temp tbm, ambos para um nó, ou seja, *first e temp são ponteiros que guardam o endereço de uma estrutura t_list, mas poderia ser de um int ou char -> jogar no python tutor pra ver como ele coloca o endereço que temp tem no first.
 	*/
 
 void	rotate(t_list **first, char c)
@@ -38,15 +38,31 @@ void	rotate(t_list **first, char c)
 
 void	reverse_rotate(t_list **first, char c)
 {
-
 	t_list	*last;
 	t_list	*prev_last;
 
 	last = ft_lstlast(*first);
 	prev_last = get_prev_last(*first);
-	last->next = *first; //somente first é um ponteiro de um ponteiro, *first eh o ponteiro de um nó, ou seja, um nó
+	last->next = *first; 
 	*first = last;
 	prev_last->next = NULL;
 	if (c)
 		printf("rr%c\n", c);
 }
+
+void	push(t_list **first_a, t_list **first_b, char c)
+{
+	t_list	*temp;
+
+	temp = *first_a;
+	*first_a = (*first_a)->next;
+	temp->next = *first_b;
+	*first_b = temp;
+	if (c)
+		printf("p%c\n", c);
+
+}
+
+
+
+

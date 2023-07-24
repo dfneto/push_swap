@@ -12,7 +12,8 @@ int	main(int argc, char *argv[])
 	{
 		//TODO: check errors
 
-		t_list *first = ft_lstnew(atoi(argv[1]));
+		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
+		t_list *first_b = NULL;
 		t_list *node;
 
 		int i = 2;
@@ -23,11 +24,16 @@ int	main(int argc, char *argv[])
 		}
 		node = NULL; 
 		free(node);
-		//swap(&first, 'a');
+
 		print_list(first, argc - 1); 
+//		swap(&first, 'a');
 //		rotate(&first, 'a');
-		reverse_rotate(&first, 'a');
-		print_list(first, argc - 1); 
+//		reverse_rotate(&first, 'a');
+//		push(&first, &first_b, 'b');
+
+		// print_list(first, ft_lstsize(first));
+		// printf("Imprimindo a lista b: \n");
+		// print_list(first_b, ft_lstsize(first_b));
 		
 	}
 	return (0);

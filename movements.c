@@ -25,7 +25,7 @@ void	swap(t_list **first, char c)
 void	rotate(t_list **first, char c)
 {
 	t_list	*last;
-	t_list	*temp;
+		t_list	*temp;
 
 	last = ft_lstlast(*first);
 	temp = *first;
@@ -60,8 +60,15 @@ void	push(t_list **first_a, t_list **first_b, char c)
 	*first_b = temp;
 	if (c)
 		printf("p%c\n", c);
-
 }
+
+void	double_swap(t_list **first_a, t_list **first_b)
+{
+	swap(first_a, 'a');
+	swap(first_b, 'b');
+}
+
+
 
 
 

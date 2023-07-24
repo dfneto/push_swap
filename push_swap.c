@@ -25,15 +25,19 @@ int	main(int argc, char *argv[])
 		node = NULL; 
 		free(node);
 
-		print_list(first, argc - 1); 
 //		swap(&first, 'a');
 //		rotate(&first, 'a');
 //		reverse_rotate(&first, 'a');
 //		push(&first, &first_b, 'b');
-
-		// print_list(first, ft_lstsize(first));
-		// printf("Imprimindo a lista b: \n");
-		// print_list(first_b, ft_lstsize(first_b));
+		push(&first, &first_b, 'b');
+		push(&first, &first_b, 'b');
+		push(&first, &first_b, 'b');
+		push(&first, &first_b, 'b');
+		double_swap(&first, &first_b);
+		printf("LISTA A: \n");
+		print_list(first, ft_lstsize(first));
+		printf("LISTA B: \n");
+		print_list(first_b, ft_lstsize(first_b));
 		
 	}
 	return (0);

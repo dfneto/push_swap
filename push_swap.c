@@ -33,7 +33,11 @@ int	main(int argc, char *argv[])
 		push(&first, &first_b, 'b');
 		push(&first, &first_b, 'b');
 		push(&first, &first_b, 'b');
-		double_swap(&first, &first_b);
+		printf("LISTA A: \n");
+		print_list(first, ft_lstsize(first));
+		printf("LISTA B: \n");
+		print_list(first_b, ft_lstsize(first_b));
+		double_reverse_rotate(&first, &first_b);
 		printf("LISTA A: \n");
 		print_list(first, ft_lstsize(first));
 		printf("LISTA B: \n");

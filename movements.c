@@ -68,7 +68,17 @@ void	double_swap(t_list **first_a, t_list **first_b)
 	swap(first_b, 'b');
 }
 
+void	double_rotate(t_list **first_a, t_list **first_b)
+{
+	rotate(first_a, 'a');
+	rotate(first_b, 'b');
+}
 
+void	double_reverse_rotate(t_list **first_a, t_list **first_b)
+{
+	reverse_rotate(first_a, 'a');
+	reverse_rotate(first_b, 'b');
+}
 
 
 

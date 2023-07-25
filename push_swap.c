@@ -1,18 +1,14 @@
 
 #include "push_swap.h"
 
-
-
+//TODO: check errors
+//TODO: use my ft_printf
 int	main(int argc, char *argv[])
-//int	main()
 {
-//	int argc = 4;
-//	char *argv[] = {"0", "1", "2", "3"};
 	if (argc > 1)
 	{
-		//TODO: check errors
-		//TODO: use my ft_printf
-
+		if (argc == 4)
+			sort_3_numbers(argv);
 		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
 //		t_list *first_b = NULL;
 		t_list *node;
@@ -35,8 +31,8 @@ int	main(int argc, char *argv[])
 //		double_reverse_rotate(&first, &first_b);
 //		print_list(first, ft_lstsize(first));
 //		printf("first value = %d, add = %p\n\n", first->value, first);
-		bubble_sort_linked_list(&first);
-		print_list(first, ft_lstsize(first));
+//		bubble_sort_linked_list(&first);
+//		print_list(first, ft_lstsize(first));
 	}
 	return (0);
 }

@@ -33,8 +33,10 @@ int	main(int argc, char *argv[])
 //		double_swap(&first, &first_b);
 //		double_rotate(&first, &first_b);
 //		double_reverse_rotate(&first, &first_b);
+//		print_list(first, ft_lstsize(first));
+//		printf("first value = %d, add = %p\n\n", first->value, first);
+		bubble_sort_linked_list(&first);
 		print_list(first, ft_lstsize(first));
-		bubble_sort(&first, ft_lstsize(first));
 	}
 	return (0);
 }

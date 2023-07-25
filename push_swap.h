@@ -29,3 +29,4 @@ void	double_reverse_rotate(t_list **first_a, t_list **first_b);
 
 
 void	bubble_sort(t_list **first, int len);
+void	bubble_sort_linked_list(t_list **first);

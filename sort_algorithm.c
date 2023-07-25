@@ -67,6 +67,17 @@ void	bubble_sort_linked_list(t_list **first)//TODO: entender esse bubble sorte: 
 	*first = head;
 }
 
+void	sort_2_numbers(char *argv[])
+{
+	t_list *first = ft_lstnew(atoi(argv[1]));
+	t_list *second = ft_lstnew(atoi(argv[2]));
+	ft_lstadd_back(&first, second);
+
+	if (first->value > second->value)
+		swap(&first, 'a');
+	print_list(first, 2);
+}
+
 void	sort_3_numbers(char *argv[])
 {
 	t_list *first = ft_lstnew(atoi(argv[1]));
@@ -74,7 +85,6 @@ void	sort_3_numbers(char *argv[])
 	t_list *third = ft_lstnew(atoi(argv[3]));
 	ft_lstadd_back(&first, second);
 	ft_lstadd_back(&first, third);
-	t_list *temp;
 	
 	if (first->value > second->value && second->value < third->value && third->value > first->value) //2 1 3
 		swap(&first, 'a');
@@ -92,10 +102,11 @@ void	sort_3_numbers(char *argv[])
 	}
 	else //2 3 1
 		reverse_rotate(&first, 'a');
-
 	print_list(first,3);
-
 }
 
-
+void	sort_5_numbers(char *argv[])
+{
+//TODO: 1 5 2 4 6 -> do this case!
+}
 

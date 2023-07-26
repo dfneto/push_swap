@@ -1,7 +1,7 @@
 
 #include "push_swap.h"
-
-//TODO: check errors
+//TODO: gravar essas explicações e a explicação do Marc do caderno sobre listas junto com um codigo (https://github.com/dfneto/lists/blob/master/diferenca_ponteiro_e_ponteirodoble.c)
+//TODO: check errors: se a entrada nao eh maior/menor que max_int e min_int, se nao ha letras e espacos, numeros duplicados, entrada com "" que eh um ponteiro nulo
 //TODO: use my ft_printf
 int	main(int argc, char *argv[])
 {

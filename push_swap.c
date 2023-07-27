@@ -1,6 +1,5 @@
 
 #include "push_swap.h"
-//TODO: gravar essas explicações e a explicação do Marc do caderno sobre listas junto com um codigo (https://github.com/dfneto/lists/blob/master/diferenca_ponteiro_e_ponteirodoble.c)
 //TODO: check errors: se a entrada nao eh maior/menor que max_int e min_int, se nao ha letras e espacos, numeros duplicados, entrada com "" que eh um ponteiro nulo
 //TODO: use my ft_printf
 int	main(int argc, char *argv[])
@@ -17,12 +16,12 @@ int	main(int argc, char *argv[])
  			t_list *third = ft_lstnew(atoi(argv[3]));
 			ft_lstadd_back(&first, second);
  			ft_lstadd_back(&first, third);
-			sort_3_numbers(first, second, third);
+			sort_3_numbers(&first, second, third);
 		}
 		if (argc == 5 || argc == 6) // para 4 ou 5 numeros
 			sort_5_numbers(argv, argc - 1);
 		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
-		t_list *first_b = NULL;
+		//t_list *first_b = NULL;
 		t_list *node;
 
 		int i = 2;

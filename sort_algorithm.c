@@ -80,7 +80,7 @@ void	sort_2_numbers(char *argv[])
 
 //TODO: aqui devo receber um **first porque vou alterar o first
 //void	sort_3_numbers(char *argv[])
-void	sort_3_numbers(t_list *first, t_list *second, t_list *third)
+void	sort_3_numbers(t_list **first, t_list *second, t_list *third)
 {
 	/*t_list *first = ft_lstnew(atoi(argv[1]));
 	t_list *second = ft_lstnew(atoi(argv[2]));
@@ -88,23 +88,54 @@ void	sort_3_numbers(t_list *first, t_list *second, t_list *third)
 	ft_lstadd_back(&first, second);
 	ft_lstadd_back(&first, third);
 	*/
-	if (first->value > second->value && second->value < third->value && third->value > first->value) //2 1 3
-		swap(&first, 'a');
-	else if (first->value > second->value && second->value > third->value && third->value < first->value) //3 2 1
+	if ((*first)->value > second->value && second->value < third->value && third->value > (*first)->value) //2 1 3
+		swap(first, 'a');
+	else if ((*first)->value > second->value && second->value > third->value && third->value < (*first)->value) //3 2 1
 	{
-		swap(&first, 'a');
-		reverse_rotate(&first, 'a');
+		swap(first, 'a');
+		reverse_rotate(first, 'a');
 	}
-	else if (first->value > second->value && second->value < third->value && third->value < first->value) //3 1 2
-		rotate(&first, 'a');
-	else if (first->value < second->value && second->value > third->value && third->value > first->value) //1 3 2
+	else if ((*first)->value > second->value && second->value < third->value && third->value < (*first)->value) //3 1 2
+		rotate(first, 'a');
+	else if ((*first)->value < second->value && second->value > third->value && third->value > (*first)->value) //1 3 2
 	{
-		swap(&first, 'a');
-		rotate(&first, 'a');
+		swap(first, 'a');
+		rotate(first, 'a');
 	}
-	else if (first->value < second->value && second->value > third->value && third->value < first->value) //2 3 1
-		reverse_rotate(&first, 'a');
-	print_list(first);
+	else if ((*first)->value < second->value && second->value > third->value && third->value < (*first)->value) //2 3 1
+		reverse_rotate(first, 'a');
+	//print_list(*first);
+}
+
+int	get_min_value(t_list *node)
+{
+	int min_value = node->value;
+	node = node->next;
+
+	while(node)
+	{
+		if (node->value < min_value)
+			min_value = node->value;
+		node = node->next;
+	}
+	return (min_value);
+
+}
+
+void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
+{
+	int min_value = get_min_value(*first);
+
+	while ((*first)->value != min_value) //primeira posicao
+	{
+		if ((*first)->next->value == min_value) //segunda posicao
+			swap(first, 'a');
+		else if ((*first)->next->next->value == min_value) //terceira posicao
+			rotate(first, 'a');
+		else //quarta e quinta posicao
+			reverse_rotate(first, 'a');
+	}
+	push(first, first_b, 'b');
 }
 
 void	sort_5_numbers(char *argv[], int len)
@@ -119,16 +150,12 @@ void	sort_5_numbers(char *argv[], int len)
 		node = ft_lstnew(atoi(argv[i++]));
 		ft_lstadd_back(&first, node);
 	}
-	node = NULL;
-	free(node);	
 
-	push(&first, &first_b, 'b');
-	push(&first, &first_b, 'b');
-	sort_3_numbers(first, first->next, first->next->next);	
-
-	printf("List A:\n");
-	print_list(first);
-	printf("List B:\n");
-	print_list(first_b);
+	push_the_min_value_to_list_b(&first, &first_b);
+	if (len == 5)
+		push_the_min_value_to_list_b(&first, &first_b);
+	sort_3_numbers(&first, first->next, first->next->next);	
+	push(&first_b, &first, 'a');
+	push(&first_b, &first, 'a');
 }
 

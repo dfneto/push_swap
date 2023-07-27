@@ -33,6 +33,6 @@ void	bubble_sort(t_list **first, int len);
 void	bubble_sort_linked_list(t_list **first);
 void    sort_2_numbers(char *argv[]);
 //void    sort_3_numbers(char *argv[]);
-void    sort_3_numbers(t_list *first, t_list *secod, t_list *third);
+void    sort_3_numbers(t_list **first, t_list *secod, t_list *third);
 void    sort_5_numbers(char *argv[], int len);
 

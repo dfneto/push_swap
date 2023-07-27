@@ -150,12 +150,14 @@ void	sort_5_numbers(char *argv[], int len)
 		node = ft_lstnew(atoi(argv[i++]));
 		ft_lstadd_back(&first, node);
 	}
-
+	//TODO: verificar se a lista ja esta ordenada antes de fazer qualquer movimentação
 	push_the_min_value_to_list_b(&first, &first_b);
 	if (len == 5)
 		push_the_min_value_to_list_b(&first, &first_b);
 	sort_3_numbers(&first, first->next, first->next->next);	
 	push(&first_b, &first, 'a');
 	push(&first_b, &first, 'a');
+
+	print_list(first);
 }
 

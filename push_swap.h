@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **first, t_list *new);
 void	print_list(t_list *root);
 void	print_lists(t_list *root_a, t_list *root_b);
 int		ft_lstsize(t_list *lst);
-
+int	get_len_list(t_list *root);
 
 
 
@@ -35,4 +35,5 @@ void    sort_2_numbers(char *argv[]);
 //void    sort_3_numbers(char *argv[]);
 void    sort_3_numbers(t_list **first, t_list *secod, t_list *third);
 void    sort_5_numbers(char *argv[], int len);
+void	sort_up_to_100_numbers(char *argv[], int len);
 

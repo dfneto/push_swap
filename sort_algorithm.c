@@ -168,7 +168,7 @@ void	set_the_index_to_the_list(t_list *first, int len)
 		index++;
 		prev_value = current->value;
 	}
-	print_list(first);
+	// print_list(first);
 }
 
 // void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
@@ -222,7 +222,7 @@ void	sort_5_numbers(char *argv[], int len)
 	t_list *first_b = NULL;
 	t_list *node;
 
-	int i = 2;//TODO alterar o código para começar de 0
+	int i = 2;
 	while(i <= len)
 	{
 		node = ft_lstnew(atoi(argv[i++]));
@@ -243,6 +243,52 @@ void	sort_5_numbers(char *argv[], int len)
 	push(&first_b, &first, 'a');
 	push(&first_b, &first, 'a');
 
-	print_list(first);
+	// print_list(first);
 }
 
+void	sort_up_to_100_numbers(char *argv[], int len)
+{
+	t_list *first = ft_lstnew(atoi(argv[1]));
+	t_list *first_b = NULL;
+	t_list *node;
+	int	chunk = 0;
+
+	int i = 2;
+	while(i <= len)
+	{
+		node = ft_lstnew(atoi(argv[i++]));
+		ft_lstadd_back(&first, node);
+	}
+	if (list_is_ordered(first)) 
+		exit(0);
+	set_the_index_to_the_list(first, len);
+	//print_list(first);
+	// (void) chunk;
+	// (void) first_b;
+
+	
+	
+	while(first) //quando first = null nao tem mais elementos em A
+	{
+		i = 0;
+		len = get_len_list(first);
+		
+		chunk = chunk + 20;
+		while(i < len)
+		{
+			node = first;
+			if (node->index < chunk)
+			{
+				// node = node->next;
+				push(&first, &first_b, 'b');
+			}
+			else
+			{
+				// node = node->next;
+				rotate(&first, 'a');
+			}
+			i++;
+		}
+	}
+	print_list(first_b);
+}

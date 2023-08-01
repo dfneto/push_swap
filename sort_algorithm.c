@@ -118,19 +118,82 @@ int	get_min_value(t_list *node)
 			min_value = node->value;
 		node = node->next;
 	}
-	return (min_value);
+	return (node->index);
+}
+//TODO: refazer de uma forma mais simples
+void	set_the_index_to_the_list(t_list *first, int len)
+{
+	t_list		*node;
+	t_list		*current;
+	int			prev_value;
+	int			index;
 
+	if (!first)
+		return; //TODO verificar se estou tratando corretamente o caso de node = null
+	index = 0;
+	prev_value = -2147483648;
+	while (index < len)
+	{
+		node = first;
+		while (node)
+		{
+			if (node->value > prev_value)
+			{
+				current = node;
+				break;
+			}
+			node = node->next;
+		}
+		node = first;
+		while (node)
+		{
+			if (node->value < current->value && node->value > prev_value)
+				current = node;
+			node = node->next;
+		}
+		current->index = index;
+		index++;
+		prev_value = current->value;
+	}
+	print_list(first);
+}
+
+// void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
+// {
+// 	int min_value = get_min_value(*first);
+
+// 	while ((*first)->value != min_value) //primeira posicao
+// 	{
+// 		if ((*first)->next->value == min_value) //segunda posicao
+// 			swap(first, 'a');
+// 		else if ((*first)->next->next->value == min_value) //terceira posicao
+// 			rotate(first, 'a');
+// 		else //quarta e quinta posicao
+// 			reverse_rotate(first, 'a');
+// 	}
+// 	push(first, first_b, 'b');
+// }
+
+int	get_min_index(t_list *node)
+{
+	int min_index = node->index;
+	while(node)
+	{
+		if (node->index < min_index)
+			min_index = node->index;
+		node = node->next;
+	}
+	return min_index;
 }
 
 void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
 {
-	int min_value = get_min_value(*first);
-
-	while ((*first)->value != min_value) //primeira posicao
+	int min_index = get_min_index(*first); //TODO: acho que posso fazer hard code a posicao 0 e 1 porque sempre vao ser os dois menores indices
+	if((*first)->index != min_index) //primeira posição
 	{
-		if ((*first)->next->value == min_value) //segunda posicao
+		if((*first)->next->index == min_index) //segunda posicao
 			swap(first, 'a');
-		else if ((*first)->next->next->value == min_value) //terceira posicao
+		else if((*first)->next->next->index == min_index) //terceira posicao
 			rotate(first, 'a');
 		else //quarta e quinta posicao
 			reverse_rotate(first, 'a');
@@ -144,13 +207,14 @@ void	sort_5_numbers(char *argv[], int len)
 	t_list *first_b = NULL;
 	t_list *node;
 
-	int i = 2;
+	int i = 2;//TODO alterar o código para começar de 0
 	while(i <= len)
 	{
 		node = ft_lstnew(atoi(argv[i++]));
 		ft_lstadd_back(&first, node);
 	}
 	//TODO: verificar se a lista ja esta ordenada antes de fazer qualquer movimentação
+	set_the_index_to_the_list(first, len);
 	push_the_min_value_to_list_b(&first, &first_b);
 	if (len == 5)
 		push_the_min_value_to_list_b(&first, &first_b);

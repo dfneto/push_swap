@@ -58,7 +58,7 @@ void	print_list(t_list *root)
 	len = get_len_list(root);
 	while(i < len)
 	{
-		printf("Node value = %d - %p\n", root->value, root);
+		printf("Id/Value %d - %d\n", root->index, root->value);
 		root = root->next;
 		i++;
 	}

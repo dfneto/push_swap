@@ -2,7 +2,7 @@
 
 typedef struct s_list
 {
-//	void 			*content;
+	int				index;
 	int				value;
 	struct s_list	*next;
 }	t_list;

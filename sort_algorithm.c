@@ -1,5 +1,16 @@
 #include "push_swap.h"
 
+int	list_is_ordered(t_list *first)
+{
+	while(first->next)
+	{
+		if(first->value < first->next->value)
+			first = first->next;
+		else
+			return 0;
+	}
+	return 1;
+}
 
 //TODO: faço o bubble sorte e depois outro algorito que use as duas pilhas para entender como funciona o uso dos movimentos e para usar os programas de gráficos e 
 // de ver em quanto tempo meu algoritmo resolve o problema. Depois estudar um pouco sobre complexidade
@@ -88,6 +99,8 @@ void	sort_3_numbers(t_list **first, t_list *second, t_list *third)
 	ft_lstadd_back(&first, second);
 	ft_lstadd_back(&first, third);
 	*/
+	if(list_is_ordered(*first))
+		exit(0);
 	if ((*first)->value > second->value && second->value < third->value && third->value > (*first)->value) //2 1 3
 		swap(first, 'a');
 	else if ((*first)->value > second->value && second->value > third->value && third->value < (*first)->value) //3 2 1
@@ -198,6 +211,8 @@ void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
 		else //quarta e quinta posicao
 			reverse_rotate(first, 'a');
 	}
+	if (list_is_ordered(*first)) //aqui first é um **, se eu passsar somente first estou passando um **, então tenho que passar somente um nó que é *
+		exit(0);
 	push(first, first_b, 'b');
 }
 
@@ -213,7 +228,13 @@ void	sort_5_numbers(char *argv[], int len)
 		node = ft_lstnew(atoi(argv[i++]));
 		ft_lstadd_back(&first, node);
 	}
-	//TODO: verificar se a lista ja esta ordenada antes de fazer qualquer movimentação
+	
+	//TODO: se eu receber 5 1 2 3 4 vou fazer um monte de movimentos quando só deveria fazer um rotate. 
+	//Talvez deva antes de fazer 5 movimentos (5 eh o minimo de movimentos que vou fazer quando só tenho um número fora de ordem), 
+	//posso antes tentar ordenar com até 4 movimento e se conseguir não prossigo.
+	// Mas tbm isso pode ser o mesmo que testar muitas possibilidades e escolher a melhor o que no final vou também gastar processamento.
+	if (list_is_ordered(first)) 
+		exit(0);
 	set_the_index_to_the_list(first, len);
 	push_the_min_value_to_list_b(&first, &first_b);
 	if (len == 5)

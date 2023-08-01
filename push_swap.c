@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
  			ft_lstadd_back(&first, third);
 			sort_3_numbers(&first, second, third);
 		}
-		if (argc == 5 || argc == 6) // para 4 ou 5 numeros
+		if (argc == 5 || argc == 6) // para 4 ou 5 numeros na lista
 			sort_5_numbers(argv, argc - 1);
 		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
 		//t_list *first_b = NULL;

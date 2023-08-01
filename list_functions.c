@@ -56,9 +56,10 @@ void	print_list(t_list *root)
 
 	i = 0;
 	len = get_len_list(root);
+	printf("id\tvalue\n");
 	while(i < len)
 	{
-		printf("Id/Value %d - %d\n", root->index, root->value);
+		printf("%d\t%d\n", root->index, root->value);
 		root = root->next;
 		i++;
 	}

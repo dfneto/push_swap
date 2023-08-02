@@ -42,34 +42,34 @@ void	reverse_rotate(t_list **first, char c)
 		printf("rr%c\n", c);
 }
 
-void	push(t_list **first_a, t_list **first_b, char c)
+void	push(t_list **first_src, t_list **first_dst, char c)
 {
 	t_list	*temp;
 
-	temp = *first_a;
-	*first_a = (*first_a)->next;
-	temp->next = *first_b;
-	*first_b = temp;
+	temp = *first_src;
+	*first_src = (*first_src)->next;
+	temp->next = *first_dst;
+	*first_dst = temp;
 	if (c)
 		printf("p%c\n", c);
 }
 
-void	double_swap(t_list **first_a, t_list **first_b)
+void	double_swap(t_list **first_src, t_list **first_dst)
 {
-	swap(first_a, 'a');
-	swap(first_b, 'b');
+	swap(first_src, 'a');
+	swap(first_dst, 'b');
 }
 
-void	double_rotate(t_list **first_a, t_list **first_b)
+void	double_rotate(t_list **first_src, t_list **first_dst)
 {
-	rotate(first_a, 'a');
-	rotate(first_b, 'b');
+	rotate(first_src, 'a');
+	rotate(first_dst, 'b');
 }
 
-void	double_reverse_rotate(t_list **first_a, t_list **first_b)
+void	double_reverse_rotate(t_list **first_src, t_list **first_dst)
 {
-	reverse_rotate(first_a, 'a');
-	reverse_rotate(first_b, 'b');
+	reverse_rotate(first_src, 'a');
+	reverse_rotate(first_dst, 'b');
 }
 
 

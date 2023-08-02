@@ -263,7 +263,6 @@ void	sort_up_to_100_numbers(char *argv[], int len)
 		exit(0);
 	set_the_index_to_the_list(first, len);
 
-
 	//envio os elementos de A para B em chunks
 	while(first) //quando first = null nao tem mais elementos em A
 	{
@@ -291,10 +290,22 @@ void	sort_up_to_100_numbers(char *argv[], int len)
 	
 	while(first_b)
 	{	//se o topo da stack é o indice que procuro faco push
-		if(first_b->index == index_desired || first_b->index == index_desired - 1) 
+		if(first_b->index == index_desired)
 		{
-			push(&first_b, &first, 'a'); //TODO: fazer swap em A ...
+			push(&first_b, &first, 'a'); 
+			if(first->next && first->index > first->next->index)  //se na stack A tem um número menor em baixo do maior, faco um swap
+			{
+				swap(&first, 'a');
+				index_desired--;	
+			}	
 			index_desired--;
+			continue;
+		}
+		else if (first_b->index == index_desired - 1) //se o top da stack é o índice anterior que procuro envio para a stack A
+		{
+			push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
+			// if(first->next && first->index > first->next->index)
+			// 	swap(&first, 'a');
 			continue;
 		}
 		//se o top não é o indice, vou procurar o caminho mais curto para fazer o rotate ou reverse-rotate
@@ -302,17 +313,23 @@ void	sort_up_to_100_numbers(char *argv[], int len)
 		node = first_b;
 		while(i <= index_desired)										
 		{
-			if(node->index == index_desired)
+			if(node && node->index == index_desired) //TODO: verificar se node eh nulo em todos os casos que uso node e que nao fiz isso antes (para evitar repetir codigo)
 			{
-				if (i < index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+				if (i <= index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
 				{
 					node = first_b;
-					while(node->index != index_desired)//o nó não eh o elemento que procuro
+					while(node && node->index != index_desired)//o nó não eh o elemento que procuro
 					{
-						if (node->index == index_desired - 1)
+						
+						if (node->index == (index_desired - 1))
+						{
 							push(&first_b, &first, 'a');
-						rotate(&first_b, 'b');
+							// if(first->next && first->index > first->next->index)
+							// 	swap(&first, 'a');
+						}
+						
 						node = node->next;
+						rotate(&first_b, 'b');
 					}
 				}
 				else //faco rr ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
@@ -320,17 +337,25 @@ void	sort_up_to_100_numbers(char *argv[], int len)
 					node = first_b;
 					while(node->index != index_desired)//o nó não eh o elemento que procuro
 					{
+						
 						if (node->index == index_desired - 1)
+						{
 							push(&first_b, &first, 'a');
+							// if(first->index > first->next->index)
+							// 	swap(&first, 'a');
+						}
+						
+						// node = node->next;
 						reverse_rotate(&first_b, 'b');
-						node = node->next;
+						node = first_b;
 					}
 				}
-				continue; //sair deste while
+				break; //sair deste while
 			}
 			else
 			{
-				node = node->next;
+				if (node)
+					node = node->next;
 				i++;
 			}
 		}
@@ -338,6 +363,9 @@ void	sort_up_to_100_numbers(char *argv[], int len)
 
 
 	}
-
+	printf("Lista A:\n");
+	print_list(first);
+	printf("----------------:\n");
+	printf("Lista B:\n");
 	print_list(first_b);
 }

@@ -49,6 +49,18 @@ int	get_len_list(t_list *root)
 	return (i);	
 }
 
+int	list_is_ordered(t_list *first)
+{
+	while(first->next)
+	{
+		if(first->value < first->next->value)
+			first = first->next;
+		else
+			return 0;
+	}
+	return 1;
+}
+
 void	print_list(t_list *root)
 {
 	int	i;
@@ -64,39 +76,7 @@ void	print_list(t_list *root)
 		i++;
 	}
 }
-/*
-void	print_lists(t_list *root_a, t_list *root_b)
-{
-	int	i;
-	int	len_a;
-	int	len_b;
-	int	higher_len;
-	char a = '_';
-	char b = '_';
 
-	i = 0;
-	len_a = get_len_list(root_a);
-	len_b = get_len_list(root_b);
-	if (len_a > len_b)
-		higher_len = len_a;
-	else
-		higher_len = len_b;
-	printf("List A\t\t\tList B\n");
-	while(i < higher_len)
-	{
-		if (root_a->value)
-			a = root_a->value + 48;
-		if (root_b->value)
-			b = root_b->value + 48;
-		printf("%c\t\t\t%c\n", a, b);
-		root_a = root_a->next;
-		root_b = root_b->next;
-		a = '_';
-		b = '_';
-		i++;
-	}
-}
-*/
 int	ft_lstsize(t_list *lst)
 {
 	int	size;

@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 		if (argc == 5 || argc == 6) // para 4 ou 5 numeros na lista
 			sort_5_numbers(argv, argc - 1);
 		if (argc > 6 && argc <= 101) //para listas entre 6 e 100 números
-			sort_up_to_100_numbers(argv, argc - 1);
+			sort_6_more_numbers(argv, argc - 1);
 		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
 		//t_list *first_b = NULL;
 		t_list *node;

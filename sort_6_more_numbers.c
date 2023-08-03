@@ -22,6 +22,7 @@ int	get_chunk_size(int len)
 		return 62;
 }
 
+/*
 void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 {
 	t_list *node;
@@ -40,6 +41,36 @@ void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 			node = *first;
 			if (node->index < chunk)
 				push(first, first_b, 'b');
+			else
+				rotate(first, 'a');
+			i++;
+		}
+	}
+}
+*/
+
+void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
+{
+	t_list *node;
+	int i;
+	int	chunk = 0;
+	int len = get_len_list(*first);
+	int chunk_size = get_chunk_size(len);
+
+	while(*first) //quando first = null nao tem mais elementos em A
+	{
+		i = 0;
+		len = get_len_list(*first);
+		chunk = chunk + chunk_size;
+		while(i < len)
+		{
+			node = *first;
+			if (node->index <= chunk)
+			{
+				push(first, first_b, 'b');
+				if (node->index <= (chunk / 2))
+					rotate(first_b, 'b');
+			}
 			else
 				rotate(first, 'a');
 			i++;

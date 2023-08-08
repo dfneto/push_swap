@@ -109,50 +109,53 @@ void	sort_6_more_numbers(char *argv[], int len)
 			{
 				swap(&first, 'a');
 				index_desired--;	
-			}	
+			}
 			index_desired--;
-			continue;
+			// continue;
 		}//TODO: acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
 		else if (first_b->index == index_desired - 1) //se o top da stack é o índice anterior que procuro envio para a stack A 
 		{
 			push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
-			continue;
+			// continue;
 		}
-		//se o top não é o indice, vou procurar o caminho mais curto para fazer o rotate ou reverse-rotate
-		i = 0; //i vai me dizer quantos nós têm acima do nó com o index procurado
-		node = first_b;
-		while(i <= index_desired) //TODO: verificar se node eh nulo em todos os casos que uso node e que nao fiz isso antes (para evitar repetir codigo)										
+		else //se o top não é o indice, vou procurar o caminho mais curto para fazer o rotate ou reverse-rotate
 		{
-			if(node && node->index == index_desired) //se o no tem o índice procurado
+			//TODO: extrair a parte de contar o i em uma função a parte
+			i = 0; //i vai me dizer quantos nós têm acima do nó com o index procurado
+			node = first_b;
+			while(i <= index_desired) //TODO: verificar se node eh nulo em todos os casos que uso node e que nao fiz isso antes (para evitar repetir codigo)										
 			{
-				node = first_b;
-				if (i <= index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+				if(node && node->index == index_desired) //se o no tem o índice procurado
 				{
-					while(node && node->index != index_desired)//o nó não eh o elemento que procuro
+					node = first_b; //TODO: substituir node por first_b
+					if (i <= index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
 					{
-						if (node->index == (index_desired - 1))  //acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
-							push(&first_b, &first, 'a');
-						node = node->next;
-						rotate(&first_b, 'b');
+						while(node && node->index != index_desired)//o nó não eh o elemento que procuro
+						{
+							if (node->index == (index_desired - 1))  //acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
+								push(&first_b, &first, 'a');
+							node = node->next;
+							rotate(&first_b, 'b');
+						}
 					}
+					else //faco rr ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+					{
+						while(node->index != index_desired)//o nó não eh o elemento que procuro
+						{	
+							if (node->index == index_desired - 1) //acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
+								push(&first_b, &first, 'a');
+							reverse_rotate(&first_b, 'b');
+							node = first_b;
+						}
+					}
+					break; //sair deste while
 				}
-				else //faco rr ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+				else //se o no não tem o índice procurado
 				{
-					while(node->index != index_desired)//o nó não eh o elemento que procuro
-					{	
-						if (node->index == index_desired - 1) //acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
-							push(&first_b, &first, 'a');
-						reverse_rotate(&first_b, 'b');
-						node = first_b;
-					}
+					if (node)
+						node = node->next; //var para o próximo nó
+					i++;
 				}
-				break; //sair deste while
-			}
-			else //se o no não tem o índice procurado
-			{
-				if (node)
-					node = node->next; //var para o próximo nó
-				i++;
 			}
 		}
 	}

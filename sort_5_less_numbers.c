@@ -3,7 +3,7 @@
 void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
 {
 	int min_index = get_min_index(*first); //TODO: acho que posso fazer hard code a posicao 0 e 1 porque sempre vao ser os dois menores indices
-	if((*first)->index != min_index) //primeira posição
+	while((*first)->index != min_index) //primeira posição
 	{
 		if((*first)->next->index == min_index) //segunda posicao
 			swap(first, 'a');
@@ -19,24 +19,24 @@ void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
 
 void	sort_2_numbers(char *argv[])
 {
-	t_list *first = ft_lstnew(atoi(argv[1]));
-	t_list *second = ft_lstnew(atoi(argv[2]));
-	ft_lstadd_back(&first, second);
+	t_list *first = create_node(atoi(argv[1]));
+	t_list *second = create_node(atoi(argv[2]));
+	add_node_back(&first, second);
 
 	if (first->value > second->value)
 		swap(&first, 'a');
-	print_list(first);
+	//print_list(first);
 }
 
 //TODO: aqui devo receber um **first porque vou alterar o first
 //void	sort_3_numbers(char *argv[])
 void	sort_3_numbers(t_list **first, t_list *second, t_list *third)
 {
-	/*t_list *first = ft_lstnew(atoi(argv[1]));
-	t_list *second = ft_lstnew(atoi(argv[2]));
-	t_list *third = ft_lstnew(atoi(argv[3]));
-	ft_lstadd_back(&first, second);
-	ft_lstadd_back(&first, third);
+	/*t_list *first = create_node(atoi(argv[1]));
+	t_list *second = create_node(atoi(argv[2]));
+	t_list *third = create_node(atoi(argv[3]));
+	add_node_back(&first, second);
+	add_node_back(&first, third);
 	*/
 	if(list_is_ordered(*first))
 		exit(0);
@@ -61,15 +61,15 @@ void	sort_3_numbers(t_list **first, t_list *second, t_list *third)
 
 void	sort_5_numbers(char *argv[], int len)
 {
-	t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
+	t_list *first = create_node(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
 	t_list *first_b = NULL;
 	t_list *node;
 
 	int i = 2;
 	while(i <= len)
 	{
-		node = ft_lstnew(atoi(argv[i++]));
-		ft_lstadd_back(&first, node);
+		node = create_node(atoi(argv[i++]));
+		add_node_back(&first, node);
 	}
 	
 	//TODO: se eu receber 5 1 2 3 4 vou fazer um monte de movimentos quando só deveria fazer um rotate. 
@@ -84,7 +84,8 @@ void	sort_5_numbers(char *argv[], int len)
 		push_the_min_value_to_list_b(&first, &first_b);
 	sort_3_numbers(&first, first->next, first->next->next);	
 	push(&first_b, &first, 'a');
-	push(&first_b, &first, 'a');
+	if (len == 5)
+		push(&first_b, &first, 'a');
 
 	// print_list(first);
 }

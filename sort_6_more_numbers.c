@@ -82,7 +82,7 @@ void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 
 void	sort_6_more_numbers(char *argv[], int len)
 {
-	t_list *first = ft_lstnew(atoi(argv[1]));
+	t_list *first = create_node(atoi(argv[1]));
 	t_list *first_b = NULL;
 	t_list *node;
 	int	index_desired;
@@ -90,8 +90,8 @@ void	sort_6_more_numbers(char *argv[], int len)
 	int i = 2;
 	while(i <= len)
 	{
-		node = ft_lstnew(atoi(argv[i++]));
-		ft_lstadd_back(&first, node);
+		node = create_node(atoi(argv[i++]));
+		add_node_back(&first, node);
 	}
 	if (list_is_ordered(first)) 
 		exit(0);
@@ -156,9 +156,9 @@ void	sort_6_more_numbers(char *argv[], int len)
 			}
 		}
 	}
-	printf("Lista A:\n");
-	print_list(first);
-	printf("----------------:\n");
-	printf("Lista B:\n");
-	print_list(first_b);
+	// printf("Lista A:\n");
+	// print_list(first);
+	// printf("----------------:\n");
+	// printf("Lista B:\n");
+	// print_list(first_b);
 }

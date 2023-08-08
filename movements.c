@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/08 15:51:35 by davifern          #+#    #+#             */
+/*   Updated: 2023/08/08 15:51:36 by davifern         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_list **first, char c)
@@ -9,7 +21,7 @@ void	swap(t_list **first, char c)
 	temp->next = (*first)->next; //temp->next eh um ponteiro, (*first)->next tbm eh um ponteiro. Entao estou dizendo que ambos ponteiros apontam para (armazenam a) mesma direção
 	(*first)->next = temp;
 	temp = NULL;
-	free(temp); //TODO: ver no python tutor pq acho que nao faz diferença isso
+	free(temp); //TODO: ver no python tutor pq acho que nao faz diferença isso - ver se tem leaks
 	if (c)
 		printf("s%c\n", c);
 }
@@ -19,7 +31,7 @@ void	rotate(t_list **first, char c)
 	t_list	*last;
 	t_list	*temp;
 
-	last = ft_lstlast(*first);
+	last = get_last_node(*first);
 	temp = *first;
 	last->next = *first;
 	*first = (*first)->next;
@@ -33,7 +45,7 @@ void	reverse_rotate(t_list **first, char c)
 	t_list	*last;
 	t_list	*prev_last;
 
-	last = ft_lstlast(*first);
+	last = get_last_node(*first);
 	prev_last = get_prev_last(*first);
 	last->next = *first; 
 	*first = last;
@@ -54,6 +66,7 @@ void	push(t_list **first_src, t_list **first_dst, char c)
 		printf("p%c\n", c);
 }
 
+/*
 void	double_swap(t_list **first_src, t_list **first_dst)
 {
 	swap(first_src, 'a');
@@ -71,7 +84,4 @@ void	double_reverse_rotate(t_list **first_src, t_list **first_dst)
 	reverse_rotate(first_src, 'a');
 	reverse_rotate(first_dst, 'b');
 }
-
-
-
-
+*/

@@ -11,26 +11,26 @@ int	main(int argc, char *argv[])
 			sort_2_numbers(argv);
 		if (argc == 4) // para 3 numeros
 		{
-			t_list *first = ft_lstnew(atoi(argv[1]));
- 			t_list *second = ft_lstnew(atoi(argv[2]));
- 			t_list *third = ft_lstnew(atoi(argv[3]));
-			ft_lstadd_back(&first, second);
- 			ft_lstadd_back(&first, third);
+			t_list *first = create_node(atoi(argv[1]));
+ 			t_list *second = create_node(atoi(argv[2]));
+ 			t_list *third = create_node(atoi(argv[3]));
+			add_node_back(&first, second);
+ 			add_node_back(&first, third);
 			sort_3_numbers(&first, second, third);
 		}
 		if (argc == 5 || argc == 6) // para 4 ou 5 numeros na lista
 			sort_5_numbers(argv, argc - 1);
 		if (argc > 6 && argc <= 101) //para listas entre 6 e 100 números
 			sort_6_more_numbers(argv, argc - 1);
-		t_list *first = ft_lstnew(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
+		t_list *first = create_node(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
 		//t_list *first_b = NULL;
 		t_list *node;
 
 		int i = 2;
 		while(i <= (argc - 1))
 		{
-			node = ft_lstnew(atoi(argv[i++]));
-			ft_lstadd_back(&first, node);
+			node = create_node(atoi(argv[i++]));
+			add_node_back(&first, node);
 		}
 		node = NULL; 
 		free(node);

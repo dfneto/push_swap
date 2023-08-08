@@ -9,16 +9,15 @@ typedef struct s_list
 
 #include <stdlib.h>
 #include <unistd.h>
-t_list	*ft_lstnew(int value);
-t_list	*ft_lstlast(t_list *root);
+t_list	*create_node(int value);
+t_list	*get_last_node(t_list *root);
 t_list	*get_prev_last(t_list *root);
-void	ft_lstadd_back(t_list **first, t_list *new);
-void	print_list(t_list *root);
-void	print_lists(t_list *root_a, t_list *root_b);
-int		ft_lstsize(t_list *lst);
+void	add_node_back(t_list **first, t_list *new);
+
+
 int		get_len_list(t_list *root);
 int		list_is_ordered(t_list *first);
-
+void	print_list(t_list *root);
 
 
 void	swap(t_list **first, char c);

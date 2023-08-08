@@ -1,6 +1,7 @@
 *.swp
 *.swo
 *.vscode
+.DS_Store
 # Prerequisites
 *.d
 

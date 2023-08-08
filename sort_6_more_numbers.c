@@ -56,19 +56,21 @@ void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 	int	chunk = 0;
 	int len = get_len_list(*first);
 	int chunk_size = get_chunk_size(len);
+	int half_chunk;
 
 	while(*first) //quando first = null nao tem mais elementos em A
 	{
 		i = 0;
 		len = get_len_list(*first);
 		chunk = chunk + chunk_size;
+		half_chunk = (chunk + (chunk - chunk_size))/ 2;
 		while(i < len)
 		{
 			node = *first;
 			if (node->index <= chunk)
 			{
 				push(first, first_b, 'b');
-				if (node->index <= (chunk / 2))
+				if (node->index <= half_chunk)
 					rotate(first_b, 'b');
 			}
 			else

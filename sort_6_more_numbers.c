@@ -136,15 +136,56 @@ void	sort_6_more_numbers(char *argv[], int len)
 		{
 			if (!index_distance)
 				index_distance = calculate_index_distance(first_b, index_desired, len);
-			if (index_distance < len / 2) 
+			if (index_distance < index_desired / 2) 
 				rotate(&first_b, 'b');
 			else
 				reverse_rotate(&first_b, 'b');
 		}
+
+		// else //se o top não é o indice procuro o indice e coloco ele no topo: vou procurar o caminho mais curto para fazer o rotate ou reverse-rotate (percorra toda a stack b procurando o indice e veja se ele está na metade superior ou inferior)
+		// {//TODO: extrair a parte de contar o i em uma função a parte
+		// 	i = 0; //i vai me dizer quantos nós têm acima do nó com o index procurado
+		// 	node = first_b;
+		// 	while(i <= index_desired) //TODO: verificar se node eh nulo em todos os casos que uso node e que nao fiz isso antes (para evitar repetir codigo)										
+		// 	{
+		// 		if(node && node->index == index_desired) //se o no tem o índice procurado
+		// 		{
+		// 			node = first_b; //TODO: substituir node por first_b
+		// 			if (i <= index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+		// 			{
+		// 				while(node && node->index != index_desired)//o nó não eh o elemento que procuro
+		// 				{
+		// 					if (node->index == (index_desired - 1))  
+		// 						push(&first_b, &first, 'a');
+		// 					node = node->next;
+		// 					rotate(&first_b, 'b');
+		// 				}
+		// 			}
+		// 			else //faco rr ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
+		// 			{
+		// 				while(node->index != index_desired)// enquanto o nó não eh o elemento que procuro
+		// 				{	
+		// 					if (node->index == index_desired - 1) 
+		// 						push(&first_b, &first, 'a');
+		// 					reverse_rotate(&first_b, 'b');
+		// 					node = first_b;
+		// 				}
+		// 			}
+		// 			break; //sair deste while
+		// 		}
+		// 		else //se o no não tem o índice procurado
+		// 		{
+		// 			if (node)
+		// 				node = node->next; //var para o próximo nó
+		// 			i++;
+		// 		}
+		// 	}
+		// }
+		
 	}
-	printf("Lista A:\n");
-	print_list(first);
-	printf("----------------:\n");
-	printf("Lista B:\n");
-	print_list(first_b);
+	// printf("Lista A:\n");
+	// print_list(first);
+	// printf("----------------:\n");
+	// printf("Lista B:\n");
+	// print_list(first_b);
 }

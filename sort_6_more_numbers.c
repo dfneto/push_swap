@@ -96,6 +96,31 @@ int	calculate_index_distance(t_list *root, int index_desired, int len)
 	return (index_distance);
 }
 
+void	reorder_stack_a(t_list **first, int index_desired)
+{
+	if(index_desired - (*first)->index == 2)
+		rotate(first, 'a');
+	if((*first)->next && (*first)->index == index_desired && (*first)->index - (*first)->next->index == 1)
+		swap(first, 'a');
+	t_list *temp = get_last_node(*first);
+	if((*first)->index - temp->index == 1 || (*first)->index - get_last_node(*first)->index == 2)
+		reverse_rotate(first, 'a');
+}
+
+int	get_max_index(t_list *first)
+{
+	int	max_index;
+
+	max_index = 0;
+	while(first)
+	{
+		if(first->index > max_index)
+			max_index = first->index;
+		first = first->next;
+	}
+	return (max_index);
+}
+
 void	sort_6_more_numbers(char *argv[], int len)
 {
 	t_list *first = create_node(atoi(argv[1]));
@@ -119,19 +144,22 @@ void	sort_6_more_numbers(char *argv[], int len)
 	index_desired = len - 1; //começa do maior ao menor
 	while(first_b)
 	{	//se o topo da stack é o indice que procuro faco push
-		if(first_b->index == index_desired)
+		if(first_b->index == index_desired || first_b->index == index_desired - 1 || first_b->index == index_desired - 2)
 		{
 			push(&first_b, &first, 'a'); 
-			if(first->next && first->index > first->next->index)  //se na stack A tem um número menor em baixo do maior, faco um swap
-			{
-				swap(&first, 'a');
-				index_desired--;	
-			}
-			index_desired--;
-			index_distance = 0;
+			reorder_stack_a(&first, index_desired);
+			index_desired = get_max_index(first_b);
+			
+			// if(first->next && first->index > first->next->index)  //se na stack A tem um número menor em baixo do maior, faco um swap
+			// {
+			// 	swap(&first, 'a');
+			// 	index_desired--;
+			// }
+			// index_desired--;
+			
 		}//TODO: acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
-		else if (first_b->index == index_desired - 1) //se o top da stack é o índice anterior que procuro envio para a stack A 
-			push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
+		// else if (first_b->index == index_desired - 1 || first_b->index == index_desired - 2) //se o top da stack é o índice anterior que procuro envio para a stack A 
+			// push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
 		else
 		{
 			if (!index_distance)
@@ -141,47 +169,6 @@ void	sort_6_more_numbers(char *argv[], int len)
 			else
 				reverse_rotate(&first_b, 'b');
 		}
-
-		// else //se o top não é o indice procuro o indice e coloco ele no topo: vou procurar o caminho mais curto para fazer o rotate ou reverse-rotate (percorra toda a stack b procurando o indice e veja se ele está na metade superior ou inferior)
-		// {//TODO: extrair a parte de contar o i em uma função a parte
-		// 	i = 0; //i vai me dizer quantos nós têm acima do nó com o index procurado
-		// 	node = first_b;
-		// 	while(i <= index_desired) //TODO: verificar se node eh nulo em todos os casos que uso node e que nao fiz isso antes (para evitar repetir codigo)										
-		// 	{
-		// 		if(node && node->index == index_desired) //se o no tem o índice procurado
-		// 		{
-		// 			node = first_b; //TODO: substituir node por first_b
-		// 			if (i <= index_desired / 2) //faco rotate ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
-		// 			{
-		// 				while(node && node->index != index_desired)//o nó não eh o elemento que procuro
-		// 				{
-		// 					if (node->index == (index_desired - 1))  
-		// 						push(&first_b, &first, 'a');
-		// 					node = node->next;
-		// 					rotate(&first_b, 'b');
-		// 				}
-		// 			}
-		// 			else //faco rr ate encontrar o elemento e deixar ele no topo da stack de b. E se encontro o len-1 faco um push
-		// 			{
-		// 				while(node->index != index_desired)// enquanto o nó não eh o elemento que procuro
-		// 				{	
-		// 					if (node->index == index_desired - 1) 
-		// 						push(&first_b, &first, 'a');
-		// 					reverse_rotate(&first_b, 'b');
-		// 					node = first_b;
-		// 				}
-		// 			}
-		// 			break; //sair deste while
-		// 		}
-		// 		else //se o no não tem o índice procurado
-		// 		{
-		// 			if (node)
-		// 				node = node->next; //var para o próximo nó
-		// 			i++;
-		// 		}
-		// 	}
-		// }
-		
 	}
 	// printf("Lista A:\n");
 	// print_list(first);

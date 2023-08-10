@@ -22,33 +22,6 @@ int	get_chunk_size(int len)
 		return 62;
 }
 
-/*
-void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
-{
-	t_list *node;
-	int i;
-	int	chunk = 0;
-	int len = get_len_list(*first);
-	int chunk_size = get_chunk_size(len);
-
-	while(*first) //quando first = null nao tem mais elementos em A
-	{
-		i = 0;
-		len = get_len_list(*first);
-		chunk = chunk + chunk_size;
-		while(i < len)
-		{
-			node = *first;
-			if (node->index < chunk)
-				push(first, first_b, 'b');
-			else
-				rotate(first, 'a');
-			i++;
-		}
-	}
-}
-*/
-
 void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 {
 	t_list *node;
@@ -98,12 +71,12 @@ int	calculate_index_distance(t_list *root, int index_desired, int len)
 
 void	reorder_stack_a(t_list **first, int index_desired)
 {
-	if(index_desired - (*first)->index == 2)
+	if(index_desired - (*first)->index == 2) //desired - primeiro == 2
 		rotate(first, 'a');
-	if((*first)->next && (*first)->index == index_desired && (*first)->index - (*first)->next->index == 1)
+	if((*first)->next && (*first)->index == index_desired && index_desired - (*first)->next->index == 1) //primeiro = desired && desired - segundo = 1
 		swap(first, 'a');
-	t_list *temp = get_last_node(*first);
-	if((*first)->index - temp->index == 1 || (*first)->index - get_last_node(*first)->index == 2)
+	if((*first)->next && (((*first)->next->index == index_desired && (*first)->index - get_last_node(*first)->index == 1) || 
+		((*first)->index == index_desired && index_desired - get_last_node(*first)->index == 2))) // segundo = index_desieed && desired - ultimo = 2
 		reverse_rotate(first, 'a');
 }
 
@@ -149,6 +122,7 @@ void	sort_6_more_numbers(char *argv[], int len)
 			push(&first_b, &first, 'a'); 
 			reorder_stack_a(&first, index_desired);
 			index_desired = get_max_index(first_b);
+			index_distance = 0;
 			
 			// if(first->next && first->index > first->next->index)  //se na stack A tem um número menor em baixo do maior, faco um swap
 			// {

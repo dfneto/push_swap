@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/10 19:17:43 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/10 19:17:44 by davifern         ###   ########.fr       */
+/*   Created: 2023/08/10 19:34:05 by davifern          #+#    #+#             */
+/*   Updated: 2023/08/10 19:34:06 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	main(int argc, char *argv[])
+/*TODO: check errors: se a entrada nao eh maior/menor que max_int e min_int, se nao ha letras e espacos, numeros duplicados, entrada com "" que eh um ponteiro nulo*/
+int has_errors(char *argv[])
 {
-	if (argc > 1)
-	{
-		if (has_errors(argv))
-			return (0);
-		if (argc == 3)
-			sort_2_numbers(argv);
-		if (argc == 4)
-			sort_3_numbers(argv);
-		if (argc == 5 || argc == 6)
-			sort_5_numbers(argv, argc - 1);
-		if (argc > 6)
-			sort_6_more_numbers(argv, argc - 1);
-	}
-	return (0);
+    (void) argv;
+    return (0);
 }

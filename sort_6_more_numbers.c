@@ -69,17 +69,6 @@ int	calculate_index_distance(t_list *root, int index_desired, int len)
 	return (index_distance);
 }
 
-void	reorder_stack_a(t_list **first, int index_desired)
-{
-	if(index_desired - (*first)->index == 2) //desired - primeiro == 2
-		rotate(first, 'a');
-	if((*first)->next && (*first)->index == index_desired && index_desired - (*first)->next->index == 1) //primeiro = desired && desired - segundo = 1
-		swap(first, 'a');
-	if((*first)->next && (((*first)->next->index == index_desired && (*first)->index - get_last_node(*first)->index == 1) || 
-		((*first)->index == index_desired && index_desired - get_last_node(*first)->index == 2))) // segundo = index_desieed && desired - ultimo = 2
-		reverse_rotate(first, 'a');
-}
-
 int	get_max_index(t_list *first)
 {
 	int	max_index;
@@ -117,23 +106,14 @@ void	sort_6_more_numbers(char *argv[], int len)
 	index_desired = len - 1; //começa do maior ao menor
 	while(first_b)
 	{	//se o topo da stack é o indice que procuro faco push
-		if(first_b->index == index_desired || first_b->index == index_desired - 1 || first_b->index == index_desired - 2)
+		if(first_b->index == index_desired)// || first_b->index == index_desired - 1 || first_b->index == index_desired - 2)
 		{
 			push(&first_b, &first, 'a'); 
-			reorder_stack_a(&first, index_desired);
 			index_desired = get_max_index(first_b);
 			index_distance = 0;
-			
-			// if(first->next && first->index > first->next->index)  //se na stack A tem um número menor em baixo do maior, faco um swap
-			// {
-			// 	swap(&first, 'a');
-			// 	index_desired--;
-			// }
-			// index_desired--;
-			
 		}//TODO: acrescentar no if abaixo se o no atual eh o indice_desired -2 tbm
-		// else if (first_b->index == index_desired - 1 || first_b->index == index_desired - 2) //se o top da stack é o índice anterior que procuro envio para a stack A 
-			// push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
+		 else if (first_b->index == index_desired - 1) //se o top da stack é o índice anterior que procuro envio para a stack A 
+			push(&first_b, &first, 'a'); //se eu fiz um push de um número menor, o próximo index_desired não vai estar em B, mas em A
 		else
 		{
 			if (!index_distance)

@@ -14,10 +14,14 @@
 
 int	main(int argc, char *argv[])
 {
+	t_list *first;
+
+	first = NULL;
 	if (argc > 1)
 	{
-		if (has_errors(argv))
+		if (has_errors(argc - 1, argv))
 			return (0);
+		
 		if (argc == 3)
 			sort_2_numbers(argv);
 		if (argc == 4)

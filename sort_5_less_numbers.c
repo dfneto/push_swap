@@ -13,7 +13,7 @@ void	push_the_min_value_to_list_b(t_list **first, t_list **first_b)
 			reverse_rotate(first, 'a');
 	}
 	if (list_is_ordered(*first)) //aqui first é um **, se eu passsar somente first estou passando um **, então tenho que passar somente um nó que é *
-		exit(0);
+		exit(0); //TODO: remover exit
 	push(first, first_b, 'b');
 }
 
@@ -25,12 +25,15 @@ void	sort_2_numbers(char *argv[])
 
 	if (first->value > second->value)
 		swap(&first, 'a');
+
+	free_list(first);
+	second = NULL;
 }
 
 void	sort_3_nodes(t_list **first, t_list *second, t_list *third)
 {
 	if(list_is_ordered(*first))
-		exit(0);
+		exit(0); //TODO: nao usar exit
 	if ((*first)->value > second->value && second->value < third->value && third->value > (*first)->value) //2 1 3
 		swap(first, 'a');
 	else if ((*first)->value > second->value && second->value > third->value && third->value < (*first)->value) //3 2 1
@@ -49,6 +52,7 @@ void	sort_3_nodes(t_list **first, t_list *second, t_list *third)
 		reverse_rotate(first, 'a');
 }
 
+//TODO: implementar atoi
 void	sort_5_numbers(char *argv[], int len)
 {
 	t_list *first = create_node(atoi(argv[1])); //aqui first é um nó, ou seja, um ponteiro para uma estrutura t_list, ou seja, armazena o endereço da t_list.
@@ -62,7 +66,7 @@ void	sort_5_numbers(char *argv[], int len)
 		add_node_back(&first, node);
 	}
 	if (list_is_ordered(first)) 
-		exit(0);
+		exit(0); //TODO: nao usar exit
 	set_the_index_to_the_list(first, len);
 	push_the_min_value_to_list_b(&first, &first_b);
 	if (len == 5)
@@ -71,6 +75,11 @@ void	sort_5_numbers(char *argv[], int len)
 	push(&first_b, &first, 'a');
 	if (len == 5)
 		push(&first_b, &first, 'a');
+	
+	print_list(first);
+	free_list(first);
+	first_b = NULL;
+	node = NULL;
 }
 
 void	sort_3_numbers(char *argv[])
@@ -81,8 +90,9 @@ void	sort_3_numbers(char *argv[])
 	add_node_back(&first, second);
 	add_node_back(&first, third);
 	sort_3_nodes(&first, second, third);
-	free(third);
-	free(second);
-	free(first);
-	//TODO: print the pointer to check with the leaks output
+	
+	print_list(first);
+	free_list(first);
+	second = NULL;
+	third = NULL;
 }

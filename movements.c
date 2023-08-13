@@ -40,6 +40,8 @@ void	swap(t_list **first, char c)
 		(armazenam a) mesma direção
 }
 */
+
+//TODO: handle dangling pointer
 void	swap(t_list **first, char c)
 {
 	t_list	*temp;

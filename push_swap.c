@@ -16,7 +16,7 @@ int	main(int argc, char *argv[])
 {
 	if (argc > 1)
 	{
-		if (has_errors(argv))
+		if (has_errors2(argv, argc - 1))
 			return (0);
 		if (argc == 3)
 			sort_2_numbers(argv);

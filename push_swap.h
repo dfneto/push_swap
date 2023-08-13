@@ -21,7 +21,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int		has_errors(char *argv[]);
+// int		has_errors(char *argv[], int argc);
+int has_errors2(char *argv[], int argc);
 t_list	*create_node(int value);
 t_list	*get_last_node(t_list *root);
 t_list	*get_prev_last(t_list *root);

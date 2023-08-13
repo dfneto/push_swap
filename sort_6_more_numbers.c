@@ -91,9 +91,11 @@ void	sort_6_more_numbers(char *argv[], int len)
 		node = create_node(atoi(argv[i++]));
 		add_node_back(&first, node);
 	}
+
+	
 	if (list_is_ordered(first)) 
-		exit(0);
-	set_the_index_to_the_list(first, len);
+		return ;
+	// set_the_index_to_the_list(first, len);
 	push_all_nodes_to_b_by_chunks(&first, &first_b);
 	index_desired = len - 1;
 	while (first_b)

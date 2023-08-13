@@ -23,6 +23,8 @@ typedef struct s_list
 
 int		has_errors(int len, char *argv[]);
 void    free_list(t_list *first);
+// int		has_errors(char *argv[], int argc);
+int has_errors2(char *argv[], int argc);
 t_list	*create_node(int value);
 t_list	*get_last_node(t_list *root);
 t_list	*get_prev_last(t_list *root);
@@ -35,7 +37,10 @@ void	rotate(t_list **first, char c);
 void	reverse_rotate(t_list **first, char c);
 void	push(t_list **first_src, t_list **first_dst, char c);
 void	set_the_index_to_the_list(t_list *first, int len);
-int		get_min_index(t_list *node);
+int		get_min_value(t_list *node);
+int		get_chunk_size(int len);
+int		get_max_index(t_list *first);
+int		calculate_index_distance(t_list *root, int index_desired, int len);
 void	sort_2_numbers(char *argv[]);
 void	sort_3_numbers(char *argv[]);
 void	sort_3_nodes(t_list **first, t_list *secod, t_list *third);

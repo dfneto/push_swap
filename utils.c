@@ -52,18 +52,20 @@ int is_number(char *c)
     }
     return (1);
 }
-
+#include <string.h>
 int has_duplicates(char *num, char *numbers[], int len)
 {
     int i;
+    int times = 0;
+    i = 1;
 
-    i = 0;
     while(i < len)
     {
-        if(num == numbers[i])
-            return(1);
-        else
-            i++;
+        if (!strcmp(num, numbers[i]) && times == 1)
+            return 1;
+        else if (!strcmp(num, numbers[i]) && times == 0)
+            times = 1;
+        i++;
     }
     return (0);
 }
@@ -77,7 +79,6 @@ int has_errors(int len, char *argv[])
     int         z;
     long long   num;
 
-
     i = 1;
     j = 0;
     num = 0;
@@ -90,7 +91,11 @@ int has_errors(int len, char *argv[])
         if(num > 2147483647 || num < -2147483648)
             return(1);
         if(has_duplicates(argv[i], argv, len))
+        {
+            printf("Errorrr duplicates");
             return (1);
+        }
+        i++;
     }
     return (0);
 }

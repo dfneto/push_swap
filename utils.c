@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 19:34:05 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/10 19:34:06 by davifern         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:56:18 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 long long	atoll(const char *str)
 {
 	long long	result;
-	int	        i;
-	int	        signal;
+	int			i;
+	int			signal;
 
 	result = 0;
 	signal = 1;
@@ -38,77 +38,62 @@ long long	atoll(const char *str)
 	return (result * signal);
 }
 
-int is_number(char *c)
+int	ft_atoi(const char *str)
 {
-    if (!c)
-        return(0);
-    if (*c == '-')
-        c++;
-    while(*c)
-    {
-        if (*c < 48 || *c > 57)
-		    return (0);
-	    c++;
-    }
-    return (1);
-}
-#include <string.h>
-int has_duplicates(char *num, char *numbers[], int len)
-{
-    int i;
-    int times = 0;
-    i = 1;
+	int	result;
+	int	i;
+	int	signal;
 
-    while(i < len)
-    {
-        if (!strcmp(num, numbers[i]) && times == 1)
-            return 1;
-        else if (!strcmp(num, numbers[i]) && times == 0)
-            times = 1;
-        i++;
-    }
-    return (0);
+	result = 0;
+	signal = 1;
+	i = 0;
+	while (str[i] == '\n' || str[i] == '\f' || str[i] == '\r'
+		|| str[i] == '\t' || str[i] == '\v' || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			signal = -1;
+		i++;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		result = result * 10 + (str[i] - 48);
+		i++;
+	}
+	return (result * signal);
 }
 
-/*TODO: check errors: se nao ha letras e espacos, numeros duplicados, 
-entrada com "" que eh um ponteiro nulo*/
-int has_errors(int len, char *argv[])
+int	is_number(char *c)
 {
-    int         i;
-    int         j;
-    int         z;
-    long long   num;
-
-    i = 1;
-    j = 0;
-    num = 0;
-    z = 1;
-    while(argv[i])
-    {
-        if(!is_number(argv[i]))
-            return(1);
-        num = atoll(argv[i]);
-        if(num > 2147483647 || num < -2147483648)
-            return(1);
-        if(has_duplicates(argv[i], argv, len))
-        {
-            printf("Errorrr duplicates");
-            return (1);
-        }
-        i++;
-    }
-    return (0);
+	if (!c)
+		return (0);
+	if (*c == '-')
+		c++;
+	while (*c)
+	{
+		if (*c < 48 || *c > 57)
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
-//TODO: substituir todos first por head
-void    free_list(t_list *head)
+int	has_errors(char *argv[])
 {
-    t_list *temp;
+	int			i;
+	long long	num;
 
-    while(head)
-    {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
+	i = 1;
+	num = 0;
+	while (argv[i])
+	{
+		if (!is_number(argv[i]))
+			return (1);
+		num = atoll(argv[i]);
+		if (num > 2147483647 || num < -2147483648)
+			return (1);
+		i++;
+	}
+	return (0);
 }

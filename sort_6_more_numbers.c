@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 17:04:42 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/13 17:31:57 by davifern         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:29:44 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 
 	len = get_len_list(*first);
 	chunk_size = get_chunk_size(len);
+	chunk = 0;
 	while (*first)
 	{
 		i = 0;
@@ -73,33 +74,21 @@ void	reorder_stack_a(t_list **first, int index_desired)
  * We start to look for the index desired from the last to
  * the first one: index_desired = len - 1;
  */
-void	sort_6_more_numbers(char *argv[], int len)
+void	sort_6_more_numbers(t_list *first, int len)
 {
-	t_list	*first;
 	t_list	*first_b;
-	t_list	*node;
 	int		index_desired;
 	int		index_distance;
-	int		i;
 
 	index_distance = 0;
-	first = create_node(atoi(argv[1]));
 	first_b = NULL;
-	i = 2;
-	while (i <= len)
-	{
-		node = create_node(atoi(argv[i++]));
-		add_node_back(&first, node);
-	}
-
-	
 	if (list_is_ordered(first)) 
 		return ;
-	// set_the_index_to_the_list(first, len);
 	push_all_nodes_to_b_by_chunks(&first, &first_b);
 	index_desired = len - 1;
 	while (first_b)
 	{
+		// function(&first, &first_b, &index_desired);
 		if (first_b->index == index_desired
 			|| first_b->index == index_desired - 1
 			|| first_b->index == index_desired - 2)
@@ -113,12 +102,14 @@ void	sort_6_more_numbers(char *argv[], int len)
 		{
 			if (!index_distance)
 				index_distance = 
-					calculate_index_distance(first_b, index_desired, len);
+					calculate_index_distance(first_b, index_desired, len); //TODO: por que len nao muda? entendo que se faço um push o len muda, mas eu nao recalculo
 			if (index_distance < index_desired / 2) 
 				rotate(&first_b, 'b');
 			else
 				reverse_rotate(&first_b, 'b');
 		}
 	}
+	free_list(first);
+	first = NULL;
+	first_b = NULL;
 }
-	

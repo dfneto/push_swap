@@ -23,7 +23,7 @@ Abaixo first é um **. Se eu passsar somente first estou passando um **,
 então tenho que passar somente um nó que é *
 if (list_is_ordered(*first)) 
 */
-void	push_the_min_value_to_list_b(t_list **first,
+void	push_the_min_index_to_list_b(t_list **first,
 		t_list **first_b, int min_index)
 {
 	while ((*first)->index != min_index)
@@ -35,24 +35,19 @@ void	push_the_min_value_to_list_b(t_list **first,
 		else
 			reverse_rotate(first, 'a');
 	}
-	if (list_is_ordered(*first))
-		return ;
 	push(first, first_b, 'b');
 }
 
-void	sort_2_numbers(char *argv[])
+/*
+* Eu poderia colocar o first = NULL dentro do free_list como fez Aitor, 
+* mas ia tornar o metodo free list mais complicado e menos legivel
+*/
+void	sort_2_numbers(t_list *first)
 {
-	t_list	*first;
-	t_list	*second; 
-
-	first = create_node(atoi(argv[1]));
-	second = create_node(atoi(argv[2]));
-	add_node_back(&first, second);
-	if (first->value > second->value)
+	if (first->value > first->next->value)
 		swap(&first, 'a');
-
 	free_list(first);
-	second = NULL;
+	first = NULL;
 }
 
 /* To sort 3 nodes I test all possibilities and for each one I aplly the
@@ -90,51 +85,28 @@ void	sort_3_nodes(t_list **first, t_list *second, t_list *third)
 		reverse_rotate(first, 'a');
 }
 
-void	sort_5_numbers(char *argv[], int len)
+void	sort_5_numbers(t_list *first, int len)
 {
-	int		i;
-	t_list	*first;
 	t_list	*first_b;
-	t_list	*node;
 
-	first = create_node(atoi(argv[1]));
 	first_b = NULL;
-	i = 2;
-	while (i <= len)
-	{
-		node = create_node(atoi(argv[i++]));
-		add_node_back(&first, node);
-	}
 	if (list_is_ordered(first)) 
 		return ;
-	set_the_index_to_the_list(first, len);
-	push_the_min_value_to_list_b(&first, &first_b, 0);
+	push_the_min_index_to_list_b(&first, &first_b, 0);
 	if (len == 5)
-		push_the_min_value_to_list_b(&first, &first_b, 1);
+		push_the_min_index_to_list_b(&first, &first_b, 1);
 	sort_3_nodes(&first, first->next, first->next->next);
 	push(&first_b, &first, 'a');
 	if (len == 5)
 		push(&first_b, &first, 'a');
-	
-	print_list(first);
 	free_list(first);
+	first = NULL;
 	first_b = NULL;
-	node = NULL;
 }
 
-void	sort_3_numbers(char *argv[])
+void	sort_3_numbers(t_list *first)
 {
-	t_list	*first;
-	t_list	*second;
-	t_list	*third;
-
-	first = create_node(atoi(argv[1]));
-	second = create_node(atoi(argv[2]));
-	third = create_node(atoi(argv[3]));
-	add_node_back(&first, second);
-	add_node_back(&first, third);
-	sort_3_nodes(&first, second, third);
-	free(third);
-	free(second);
-	free(first);
+	sort_3_nodes(&first, first->next, first->next->next);
+	free_list(first);
+	first = NULL;
 }

@@ -64,11 +64,13 @@ int	get_max_index(t_list *first)
 	return (max_index);
 }
 
-int	calculate_index_distance(t_list *root, int index_desired, int len)
+int	calculate_index_distance(t_list *root, int index_desired)
 {
 	int	index_distance;
+	int	len;
 
 	index_distance = 0;
+	len = get_len_list(root);
 	while (index_distance < len)
 	{
 		if (root->index == index_desired)

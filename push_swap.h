@@ -39,7 +39,7 @@ void	set_the_index_to_the_list(t_list *first, int len);
 int		get_min_value(t_list *node);
 int		get_chunk_size(int len);
 int		get_max_index(t_list *first);
-int		calculate_index_distance(t_list *root, int index_desired, int len);
+int		calculate_index_distance(t_list *root, int index_desired);
 void	sort_2_numbers(t_list *first);
 void	sort_3_numbers(t_list *first);
 void	sort_3_nodes(t_list **first, t_list *secod, t_list *third);

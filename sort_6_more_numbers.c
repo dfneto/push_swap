@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /*
-* while(*first) //quando first = null nao tem mais elementos em A
+* while(*first) ... //quando first = null nao tem mais elementos em A
 */
 void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 {
@@ -51,8 +51,9 @@ void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
 
 /*
  * Reorder the stack accordingly with the index of the nodes 
- * (first, second and last) and the desired index
- * first if: index_desired - first index == 2
+ * (first, second and last) and the desired index. By the end
+ * the stack will be orderded in the best way to receive the numbers from b.
+ * first if: index_desired - first index == 2 (let the third in the last position)
  * second if: first index == desired && index_desired - second index = 1
  * third if: second index == index_desired && index_desired - last index == 2
  */
@@ -70,25 +71,18 @@ void	reorder_stack_a(t_list **first, int index_desired)
 		reverse_rotate(first, 'a');
 }
 
-/*
- * We start to look for the index desired from the last to
- * the first one: index_desired = len - 1;
- */
-void	sort_6_more_numbers(t_list *first, int len)
+void	function(t_list **firstb, t_list **firsta, int index_desired)
 {
-	t_list	*first_b;
-	int		index_desired;
 	int		index_distance;
+	int		len;
+
+	t_list	*first_b = *firstb;
+	t_list	*first = *firsta;
 
 	index_distance = 0;
-	first_b = NULL;
-	if (list_is_ordered(first)) 
-		return ;
-	push_all_nodes_to_b_by_chunks(&first, &first_b);
-	index_desired = len - 1;
 	while (first_b)
 	{
-		// function(&first, &first_b, &index_desired);
+		
 		if (first_b->index == index_desired
 			|| first_b->index == index_desired - 1
 			|| first_b->index == index_desired - 2)
@@ -102,8 +96,75 @@ void	sort_6_more_numbers(t_list *first, int len)
 		{
 			if (!index_distance)
 				index_distance = 
-					calculate_index_distance(first_b, index_desired, len); //TODO: por que len nao muda? entendo que se faço um push o len muda, mas eu nao recalculo
-			if (index_distance < index_desired / 2) 
+					calculate_index_distance(first_b, index_desired);
+			len = get_len_list(first_b);
+			if (index_distance < len / 2)
+				rotate(&first_b, 'b');
+			else
+				reverse_rotate(&first_b, 'b');
+		}
+	}
+}
+
+void	push_node_into_a_and_recalculate_next_index_desired(t_list **first, t_list **first_b, int *index_distance, int *index_desired)
+{
+	push(first_b, first, 'a'); 
+	reorder_stack_a(first, *index_desired);
+	*index_desired = get_max_index(*first_b);
+	*index_distance = 0;
+}
+
+void	rotate_or_reverse_rotate(t_list **first_b, int *index_distance, int index_desired)
+{
+	int	len;
+
+	len = 0;
+	if (!*index_distance)
+		*index_distance = 
+			calculate_index_distance(*first_b, index_desired);
+	len = get_len_list(*first_b);
+	if (*index_distance < len / 2)
+		rotate(first_b, 'b');
+	else
+		reverse_rotate(first_b, 'b');
+}
+
+/*
+ * We start to look for the index desired from the last to
+ * the first one: index_desired = len - 1;
+ */
+void	sort_6_more_numbers(t_list *first, int len)
+{
+	t_list	*first_b;
+	int		index_desired;
+	int		index_distance;
+
+	first_b = NULL;
+	if (list_is_ordered(first)) 
+		return ;
+	push_all_nodes_to_b_by_chunks(&first, &first_b);
+	index_desired = len - 1;
+	index_distance = 0;
+	while (first_b)
+	{
+		if (first_b->index == index_desired
+			|| first_b->index == index_desired - 1
+			|| first_b->index == index_desired - 2)
+		{
+			// push_node_into_a_and_recalculate_next_index_desired(&first, &first_b, &index_distance, &index_desired);
+			push(&first_b, &first, 'a'); 
+			reorder_stack_a(&first, index_desired);
+			index_desired = get_max_index(first_b);
+			index_distance = 0;
+		}
+		else
+		{
+			// rotate_or_reverse_rotate(&first_b, &index_distance, index_desired);
+			if (!index_distance)
+				index_distance = 
+					calculate_index_distance(first_b, index_desired);
+			len = get_len_list(first_b);
+			if (index_distance < len / 2)
 				rotate(&first_b, 'b');
 			else
 				reverse_rotate(&first_b, 'b');

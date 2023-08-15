@@ -13,47 +13,12 @@
 #include "push_swap.h"
 
 /*
-* while(*first) ... //quando first = null nao tem mais elementos em A
-*/
-void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b)
-{
-	t_list	*node;
-	int		i;
-	int		chunk;
-	int		len; 
-	int		chunk_size;
-	int		half_chunk;
-
-	len = get_len_list(*first);
-	chunk_size = get_chunk_size(len);
-	chunk = 0;
-	while (*first)
-	{
-		i = 0;
-		len = get_len_list(*first);
-		chunk = chunk + chunk_size;
-		half_chunk = (chunk + (chunk - chunk_size)) / 2;
-		while (i < len)
-		{
-			node = *first;
-			if (node->index <= chunk)
-			{
-				push(first, first_b, 'b');
-				if (node->index <= half_chunk)
-					rotate(first_b, 'b');
-			}
-			else
-				rotate(first, 'a');
-			i++;
-		}
-	}
-}
-
-/*
  * Reorder the stack accordingly with the index of the nodes 
  * (first, second and last) and the desired index. By the end
- * the stack will be orderded in the best way to receive the numbers from b.
- * first if: index_desired - first index == 2 (let the third in the last position)
+ * the stack will be orderded in the best way to receive the 
+ * numbers from b.
+ * first if: index_desired - first index == 2 (let the third in 
+ * the last position)
  * second if: first index == desired && index_desired - second index = 1
  * third if: second index == index_desired && index_desired - last index == 2
  */
@@ -71,42 +36,15 @@ void	reorder_stack_a(t_list **first, int index_desired)
 		reverse_rotate(first, 'a');
 }
 
-void	function(t_list **firstb, t_list **firsta, int index_desired)
-{
-	int		index_distance;
-	int		len;
-
-	t_list	*first_b = *firstb;
-	t_list	*first = *firsta;
-
-	index_distance = 0;
-	while (first_b)
-	{
-		
-		if (first_b->index == index_desired
-			|| first_b->index == index_desired - 1
-			|| first_b->index == index_desired - 2)
-		{
-			push(&first_b, &first, 'a'); 
-			reorder_stack_a(&first, index_desired);
-			index_desired = get_max_index(first_b);
-			index_distance = 0;
-		}
-		else
-		{
-			if (!index_distance)
-				index_distance = 
-					calculate_index_distance(first_b, index_desired);
-			len = get_len_list(first_b);
-			if (index_distance < len / 2)
-				rotate(&first_b, 'b');
-			else
-				reverse_rotate(&first_b, 'b');
-		}
-	}
-}
-
-void	push_node_into_a_and_recalculate_next_index_desired(t_list **first, t_list **first_b, int *index_distance, int *index_desired)
+/*
+* The original version was in the method sort_6_more_numbers and was:
+* push(&first_b, &first, 'a'); 
+* reorder_stack_a(&first, index_desired);
+* index_desired = get_max_index(first_b);
+* index_distance = 0;
+*/
+void	push_node_into_a_and_recalculate_next_index_desired(t_list **first,
+		t_list **first_b, int *index_distance, int *index_desired)
 {
 	push(first_b, first, 'a'); 
 	reorder_stack_a(first, *index_desired);
@@ -114,7 +52,18 @@ void	push_node_into_a_and_recalculate_next_index_desired(t_list **first, t_list 
 	*index_distance = 0;
 }
 
-void	rotate_or_reverse_rotate(t_list **first_b, int *index_distance, int index_desired)
+/*
+* The original version was in the method sort_6_more_numbers and was:
+* if (!index_distance)
+* 	index_distance = calculate_index_distance(first_b, index_desired);
+* len = get_len_list(first_b);
+* if (index_distance < len / 2)
+* 	rotate(&first_b, 'b');
+* else
+*	reverse_rotate(&first_b, 'b');
+*/
+void	rotate_or_reverse_rotate(t_list **first_b, int *index_distance,
+		int index_desired)
 {
 	int	len;
 
@@ -150,25 +99,10 @@ void	sort_6_more_numbers(t_list *first, int len)
 		if (first_b->index == index_desired
 			|| first_b->index == index_desired - 1
 			|| first_b->index == index_desired - 2)
-		{
-			// push_node_into_a_and_recalculate_next_index_desired(&first, &first_b, &index_distance, &index_desired);
-			push(&first_b, &first, 'a'); 
-			reorder_stack_a(&first, index_desired);
-			index_desired = get_max_index(first_b);
-			index_distance = 0;
-		}
+			push_node_into_a_and_recalculate_next_index_desired(&first,
+				&first_b, &index_distance, &index_desired);
 		else
-		{
-			// rotate_or_reverse_rotate(&first_b, &index_distance, index_desired);
-			if (!index_distance)
-				index_distance = 
-					calculate_index_distance(first_b, index_desired);
-			len = get_len_list(first_b);
-			if (index_distance < len / 2)
-				rotate(&first_b, 'b');
-			else
-				reverse_rotate(&first_b, 'b');
-		}
+			rotate_or_reverse_rotate(&first_b, &index_distance, index_desired);
 	}
 	free_list(first);
 	first = NULL;

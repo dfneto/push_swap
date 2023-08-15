@@ -45,3 +45,4 @@ void	sort_3_numbers(t_list *first);
 void	sort_3_nodes(t_list **first, t_list *secod, t_list *third);
 void	sort_5_numbers(t_list *first, int len);
 void	sort_6_more_numbers(t_list *first, int len);
+void	push_all_nodes_to_b_by_chunks(t_list **first, t_list **first_b);

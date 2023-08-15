@@ -40,12 +40,12 @@ void	swap(t_list **first, char c)
 		(armazenam a) mesma direção
 }
 */
-
-//TODO: handle dangling pointer
 void	swap(t_list **first, char c)
 {
 	t_list	*temp;
 
+	if (!(*first) || !((*first)->next))
+		return ;
 	temp = *first;
 	*first = (*first)->next;
 	temp->next = (*first)->next;
@@ -54,16 +54,24 @@ void	swap(t_list **first, char c)
 	print_movement("s", c);
 }
 
+/*
+* After we finish the use of the pointer we set to null to
+*  avoid dangling pointers
+*/
 void	rotate(t_list **first, char c)
 {
 	t_list	*last;
 	t_list	*temp;
 
+	if (!(*first))
+		return ;
 	last = get_last_node(*first);
 	temp = *first;
 	last->next = *first;
 	*first = (*first)->next;
 	temp->next = NULL;
+	temp = NULL;
+	last = NULL;
 	print_movement("r", c);
 }
 
@@ -72,11 +80,15 @@ void	reverse_rotate(t_list **first, char c)
 	t_list	*last;
 	t_list	*prev_last;
 
+	if (!(*first))
+		return ;
 	last = get_last_node(*first);
 	prev_last = get_prev_last(*first);
 	last->next = *first; 
 	*first = last;
 	prev_last->next = NULL;
+	last = NULL;
+	prev_last = NULL;
 	print_movement("rr", c);
 }
 
@@ -84,9 +96,12 @@ void	push(t_list **first_src, t_list **first_dst, char c)
 {
 	t_list	*temp;
 
+	if (!(*first_src))
+		return ;
 	temp = *first_src;
 	*first_src = (*first_src)->next;
 	temp->next = *first_dst;
 	*first_dst = temp;
+	temp = NULL;
 	print_movement("p", c);
 }

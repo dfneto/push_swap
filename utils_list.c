@@ -12,19 +12,31 @@
 
 #include "push_swap.h"
 
-int	get_len_list(t_list *root)
+void	set_the_index_to_the_list(t_list *first, int len)
 {
-	int	i;
+	int		index;
+	long	previous_min;
+	t_list	*min_node;
+	t_list	*aux_node;
 
-	i = 0;
-	if (root == NULL)
-		return (0);
-	while (root)
+	index = 0;
+	previous_min = -2147483649;
+	while (index < len)
 	{
-		root = root->next;
-		i++;
+		min_node = first;
+		aux_node = first->next;
+		while (aux_node)
+		{
+			if ((aux_node->value < min_node->value 
+					&& aux_node->value > previous_min) 
+				|| min_node->value <= previous_min)
+				min_node = aux_node;
+			aux_node = aux_node->next;
+		}
+		min_node->index = index;
+		previous_min = min_node->value;
+		index++;
 	}
-	return (i);
 }
 
 int	list_is_ordered(t_list *first)

@@ -13,15 +13,12 @@
 #include "push_swap.h"
 
 /*
-while((*first)->index != min_index) //primeira posição
-{
-	if((*first)->next->index == min_index) //segunda posicao
-	else if((*first)->next->next->index == min_index) //terceira posicao
-	else //quarta e quinta posicao
-}
-Abaixo first é um **. Se eu passsar somente first estou passando um **,
-então tenho que passar somente um nó que é *
-if (list_is_ordered(*first)) 
+* while((*first)->index != min_index) //primeira posição
+* {
+* 	if((*first)->next->index == min_index) //segunda posicao
+* 	else if((*first)->next->next->index == min_index) //terceira posicao
+* 	else //quarta e quinta posicao
+* }
 */
 void	push_the_min_index_to_list_b(t_list **first,
 		t_list **first_b, int min_index)
@@ -50,14 +47,21 @@ void	sort_2_numbers(t_list *first)
 	first = NULL;
 }
 
-/* To sort 3 nodes I test all possibilities and for each one I aplly the
- * right ones to sort then in each if else condition
- * if 		... 2 1 3
- * else if	... 3 2 1
- * else if	... 3 1 2
- * else if	... 1 3 2
- * else if	... 2 3 1
- */
+/* 
+* To sort 3 nodes we test all possibilities and for each one we aplly the
+* right movements to sort them in each if else condition (hard coded)
+* at once. Bellow examples to help understand the if/else
+* case #	...	example
+* if 		... 2 1 3
+* else if	... 3 2 1
+* else if	... 3 1 2
+* else if	... 1 3 2
+* else if	... 2 3 1
+* ***********************
+* Abaixo first é um **. Se eu passsar somente first estou passando um **,
+* então tenho que passar somente um nó que é *
+* if (list_is_ordered(*first)) ...
+*/
 void	sort_3_nodes(t_list **first, t_list *second, t_list *third)
 {
 	if (list_is_ordered(*first))
@@ -85,6 +89,11 @@ void	sort_3_nodes(t_list **first, t_list *second, t_list *third)
 		reverse_rotate(first, 'a');
 }
 
+/*
+* We push the index 0 (that is the minor value) to list b and
+* if it's 5 elements we push index 1 next, then we order like
+* 3 numbers and then push back from list b
+*/
 void	sort_5_numbers(t_list *first, int len)
 {
 	t_list	*first_b;
@@ -104,6 +113,10 @@ void	sort_5_numbers(t_list *first, int len)
 	first_b = NULL;
 }
 
+/*
+* We have to free the list to avoid leaks and set the pointer first (or first_b) 
+* to NULL to avoid avoid dangling pointers
+*/
 void	sort_3_numbers(t_list *first)
 {
 	sort_3_nodes(&first, first->next, first->next->next);

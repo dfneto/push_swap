@@ -24,24 +24,27 @@ t_list	*create_node(int value)
 	return (ret);
 }
 
-t_list	*get_last_node(t_list *lst)
+t_list	*get_last_node(t_list *first)
 {
-	while (lst != NULL && lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	while (first != NULL && first->next != NULL)
+		first = first->next;
+	return (first);
 }
 
-t_list	*get_prev_last(t_list *root)
+t_list	*get_prev_last(t_list *first)
 {
-	while (root->next->next != NULL)
-		root = root->next;
-	return (root);
+	while (first->next->next != NULL)
+		first = first->next;
+	return (first);
 }
 
-void	add_node_back(t_list **lst, t_list *new)
+void	add_node_back(t_list **first, t_list *new)
 {
 	t_list	*last;
 
-	last = get_last_node(*lst);
+	if (!(*first) || !new)
+		return ;
+	last = get_last_node(*first);
 	last->next = new;
+	last = NULL;
 }

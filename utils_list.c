@@ -87,7 +87,7 @@ t_list	*create_unique_list(char *argv[], int len)
 	i = 2;
 	while (i <= len)
 	{
-		value = atoi(argv[i++]);
+		value = ft_atoi(argv[i++]);
 		if (is_repeated(value, first))
 			return (0);
 		node = create_node(value);

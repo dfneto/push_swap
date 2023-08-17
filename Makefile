@@ -46,8 +46,12 @@ all: $(NAME)
 $(NAME): $(HEADER) $(OBJ) 
 	ar -rcs $(NAME) $(OBJ) 
 
+compile:
+	gcc *.c -g -o push_swap
+
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) *.out push_swap
+	rm -rf *.dSYM
 
 fclean: clean
 	rm -f $(NAME)

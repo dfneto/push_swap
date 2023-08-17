@@ -6,7 +6,7 @@
 /*   By: davifern <davifern@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 19:17:43 by davifern          #+#    #+#             */
-/*   Updated: 2023/08/15 15:54:53 by davifern         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:19:20 by davifern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	print_error(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	return (0);
 }
 
